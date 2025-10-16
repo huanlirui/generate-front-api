@@ -1,12 +1,14 @@
-# API 代码生成器 - 命名策略说明
+# API Code Generator - Naming Strategy Guide
 
-## 三种文件夹命名方式
+English | [简体中文](./naming-strategy-examples.zh-CN.md)
 
-### 方式1: 直接使用 Tag (namingStrategy: 'tag')
+## Three Folder Naming Methods
 
-直接使用 OpenAPI 规范中的 tag 作为文件夹名称。
+### Method 1: Direct Tag Usage (namingStrategy: 'tag')
 
-**配置示例:**
+Directly use the tag from the OpenAPI specification as the folder name.
+
+**Configuration Example:**
 
 ```javascript
 const config = {
@@ -16,83 +18,83 @@ const config = {
 };
 ```
 
-**生成结果:**
+**Generated Result:**
 
-- 如果 API 的 tag 是 `"部门管理"`, 生成路径: `src/api/部门管理/`
-- 如果 API 的 tag 是 `"User Management"`, 生成路径: `src/api/User Management/`
+- If the API tag is `"Department Management"`, generates path: `src/api/Department Management/`
+- If the API tag is `"User Management"`, generates path: `src/api/User Management/`
 
-**优点:**
+**Advantages:**
 
-- 与 OpenAPI 文档的 tag 完全一致，方便对应查看
-- 配置简单，无需额外设置
+- Completely consistent with OpenAPI document tags, easy to reference
+- Simple configuration, no additional setup needed
 
-**缺点:**
+**Disadvantages:**
 
-- 可能包含中文或特殊字符
-- 可能不符合项目命名规范
+- May contain Chinese or special characters
+- May not comply with project naming conventions
 
 ---
 
-### 方式2: Tag 映射 (namingStrategy: 'tagMapping')
+### Method 2: Tag Mapping (namingStrategy: 'tagMapping')
 
-使用自定义映射表，将 OpenAPI 的 tag 映射到你想要的文件夹路径。
+Use a custom mapping table to map OpenAPI tags to your desired folder paths.
 
-**配置示例:**
+**Configuration Example:**
 
 ```javascript
 const config = {
   naming: {
     namingStrategy: 'tagMapping',
     tagMapping: {
-      '部门管理': 'deptManage/orgDept',
-      '人力资源-基础管理': 'hr/basicManage',
-      '人力资源-员工管理': 'hr/staffManage',
+      'Department Management': 'deptManage/orgDept',
+      'Human Resources-Basic Management': 'hr/basicManage',
+      'Human Resources-Staff Management': 'hr/staffManage',
       'User Management': 'user/manage',
-      'default': 'common' // 未配置映射的 tag 会使用此默认值
+      'default': 'common' // Tags without mapping will use this default value
     }
   }
 };
 ```
 
-**生成结果:**
+**Generated Result:**
 
-- API tag 是 `"部门管理"` → 生成路径: `src/api/deptManage/orgDept/`
-- API tag 是 `"人力资源-基础管理"` → 生成路径: `src/api/hr/basicManage/`
-- API tag 是 `"其他模块"` (未配置) → 生成路径: `src/api/common/`
+- API tag is `"Department Management"` → generates path: `src/api/deptManage/orgDept/`
+- API tag is `"Human Resources-Basic Management"` → generates path: `src/api/hr/basicManage/`
+- API tag is `"Other Module"` (not configured) → generates path: `src/api/common/`
 
-**优点:**
+**Advantages:**
 
-- 完全自定义文件夹结构
-- 可以将相关模块组织到同一目录下
-- 符合项目命名规范
-- 与文档 tag 有明确对应关系
+- Complete control over folder structure
+- Can organize related modules into the same directory
+- Complies with project naming conventions
+- Clear correspondence with document tags
 
-**推荐场景:**
+**Recommended Scenarios:**
 
-- 当你需要精确控制文件夹结构时
-- 当你需要将多个 tag 合并到同一目录时
-- 当你的团队有严格的目录命名规范时
+- When you need precise control over folder structure
+- When you need to merge multiple tags into the same directory
+- When your team has strict directory naming conventions
 
 ---
 
-### 方式3: URL 路径 (namingStrategy: 'path')
+### Method 3: URL Path (namingStrategy: 'path')
 
-根据 API 的 URL 路径自动生成文件夹结构。
+Automatically generate folder structure based on API URL paths.
 
-**配置示例:**
+**Configuration Example:**
 
 ```javascript
 const config = {
   naming: {
     namingStrategy: 'path',
-    pathDepth: 3 // 提取 URL 路径的前几层
+    pathDepth: 3 // Extract the first N levels of URL path
   }
 };
 ```
 
-**生成规则:**
+**Generation Rules:**
 
-假设有以下 API:
+Assume the following APIs:
 
 - `/hr/basicManage/medicalOrg/list`
 - `/hr/basicManage/medicalOrg/{id}`
@@ -111,39 +113,39 @@ const config = {
 - `/hr/staffManage/employee/...` → `src/api/hr/staffManage/employee/`
 - `/dept/org/tree` → `src/api/dept/org/tree/`
 
-**优点:**
+**Advantages:**
 
-- 完全自动化，无需手动配置映射
-- 文件夹结构与 URL 路径一致
-- 适合 RESTful API
+- Fully automated, no manual mapping configuration needed
+- Folder structure matches URL paths
+- Suitable for RESTful APIs
 
-**缺点:**
+**Disadvantages:**
 
-- 与文档 tag 可能不一致
-- 无法自定义文件夹名称
+- May not match document tags
+- Cannot customize folder names
 
 ---
 
-## 使用建议
+## Usage Recommendations
 
-### 选择哪种方式?
+### Which Method to Choose?
 
-1. **如果你希望完全按照 OpenAPI 文档的 tag 来组织代码:**
+1. **If you want to organize code entirely based on OpenAPI document tags:**
 
-   - 使用方式1 (`namingStrategy: 'tag'`)
+   - Use Method 1 (`namingStrategy: 'tag'`)
 
-2. **如果你需要自定义文件夹结构，但又想与文档 tag 保持对应关系:**
+2. **If you need to customize folder structure but maintain correspondence with document tags:**
 
-   - 使用方式2 (`namingStrategy: 'tagMapping'`)
-   - 推荐! 这是最灵活的方式
+   - Use Method 2 (`namingStrategy: 'tagMapping'`)
+   - Recommended! This is the most flexible method
 
-3. **如果你的 API 遵循 RESTful 规范，且 URL 路径已经很规范:**
-   - 使用方式3 (`namingStrategy: 'path'`)
+3. **If your API follows RESTful conventions and URL paths are already well-structured:**
+   - Use Method 3 (`namingStrategy: 'path'`)
 
-### 实际项目配置示例
+### Real Project Configuration Example
 
 ```javascript
-// script/generate-v2.js 中修改 defaultConfig
+// Modify defaultConfig in script/generate-v2.js
 
 const defaultConfig = {
   openApiFile: 'openApi.json',
@@ -152,19 +154,19 @@ const defaultConfig = {
     baseDir: '../src/api'
   },
   naming: {
-    // 方式1: 直接使用 tag
+    // Method 1: Direct tag usage
     // namingStrategy: 'tag',
 
-    // 方式2: tag 映射 (推荐)
+    // Method 2: Tag mapping (Recommended)
     namingStrategy: 'tagMapping',
     tagMapping: {
-      '部门管理': 'deptManage/orgDept',
-      '人力资源-基础管理': 'hr/basicManage',
-      '人力资源-员工管理': 'hr/staffManage',
+      'Department Management': 'deptManage/orgDept',
+      'Human Resources-Basic Management': 'hr/basicManage',
+      'Human Resources-Staff Management': 'hr/staffManage',
       'default': 'common'
     },
 
-    // 方式3: URL 路径
+    // Method 3: URL path
     // namingStrategy: 'path',
     // pathDepth: 3,
 
@@ -172,40 +174,40 @@ const defaultConfig = {
     formSuffix: 'Form',
     querySuffix: 'Query'
   }
-  // ... 其他配置
+  // ... other configuration
 };
 ```
 
-### 如何快速配置 tagMapping?
+### How to Quickly Configure tagMapping?
 
-1. 先运行一次代码生成，使用 `namingStrategy: 'tag'`
-2. 查看生成的文件夹名称（就是原始的 tag）
-3. 根据需要配置映射关系
-4. 修改为 `namingStrategy: 'tagMapping'` 并添加映射配置
-5. 重新运行代码生成
+1. First run code generation once using `namingStrategy: 'tag'`
+2. Check the generated folder names (these are the original tags)
+3. Configure mapping relationships as needed
+4. Change to `namingStrategy: 'tagMapping'` and add mapping configuration
+5. Run code generation again
 
-### 命令行使用
+### Command Line Usage
 
 ```bash
-# 使用默认配置
+# Use default configuration
 npm run api:gen
 
-# 使用自定义 URL
+# Use custom URL
 npm run api:gen -- --url=http://your-api.com/openapi.json
 ```
 
 ---
 
-## 常见问题
+## FAQ
 
-**Q: 我能混合使用多种策略吗?**
-A: 不能，每次生成只能使用一种策略。但你可以修改配置后重新生成。
+**Q: Can I mix multiple strategies?**
+A: No, each generation can only use one strategy. However, you can change the configuration and regenerate.
 
-**Q: 如果某个 tag 没有配置映射怎么办?**
-A: 在 `tagMapping` 中配置 `'default'` 作为默认映射，或者会使用原始 tag 名。
+**Q: What happens if a tag doesn't have a mapping?**
+A: Configure `'default'` in `tagMapping` as the default mapping, or the original tag name will be used.
 
-**Q: 可以在运行时切换策略吗?**
-A: 可以通过修改配置文件或传入自定义配置对象来切换。
+**Q: Can I switch strategies at runtime?**
+A: Yes, by modifying the configuration file or passing a custom configuration object.
 
-**Q: 生成的文件夹名称包含特殊字符怎么办?**
-A: 使用方式2 (tagMapping) 或方式3 (path)，可以避免特殊字符问题。
+**Q: What if generated folder names contain special characters?**
+A: Use Method 2 (tagMapping) or Method 3 (path) to avoid special character issues.

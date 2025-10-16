@@ -1,25 +1,25 @@
-# Template Customization Examples
+# 模板自定义示例
 
-English | [简体中文](./TEMPLATE_EXAMPLES.zh-CN.md)
+[English](./TEMPLATE_EXAMPLES.md) | 简体中文
 
-This document provides template customization examples for various practical use cases.
+本文档提供了各种实际使用场景的模板自定义示例。
 
-## 📁 Template File Location
+## 📁 模板文件位置
 
-Create a `templates/` directory in your project root:
+在项目根目录创建 `templates/` 目录：
 
 ```
 your-project/
 ├── templates/
-│   ├── api-function.template      # API function template
-│   └── index-header.template      # File header template
+│   ├── api-function.template      # API 函数模板
+│   └── index-header.template      # 文件头部模板
 ├── generate-front-api.config.js
 └── package.json
 ```
 
-## 🎯 Use Case Examples
+## 🎯 使用场景示例
 
-### Case 1: Using Custom HTTP Client
+### 场景 1: 使用自定义的 HTTP 客户端
 
 #### templates/index-header.template
 
@@ -49,7 +49,7 @@ export const {{functionName}} = ({{params}}) => {
 
 ```
 
-### Case 2: Using Fetch API
+### 场景 2: 使用 fetch API
 
 #### templates/index-header.template
 
@@ -76,7 +76,7 @@ export const {{functionName}} = async ({{params}}): Promise<{{returnType}}> => {
 
 ```
 
-### Case 3: Using React Query
+### 场景 3: 使用 React Query
 
 #### templates/index-header.template
 
@@ -115,7 +115,7 @@ export const use{{functionName}} = ({{params}}) => {
 
 ```
 
-### Case 4: Adding Request Interception and Error Handling
+### 场景 4: 添加请求拦截和错误处理
 
 #### templates/api-function.template
 
@@ -142,7 +142,7 @@ export const {{functionName}} = async ({{params}}): Promise<{{returnType}}> => {
 
 ```
 
-### Case 5: Using SWR
+### 场景 5: 使用 SWR
 
 #### templates/index-header.template
 
@@ -181,7 +181,7 @@ export const use{{functionName}} = ({{params}}) => {
 
 ```
 
-### Case 6: Using TypeScript Strict Mode
+### 场景 6: 使用 TypeScript 严格模式
 
 #### templates/index-header.template
 
@@ -212,7 +212,7 @@ export function {{functionName}}({{params}}): AxiosPromise<{{returnType}}> {
 
 ```
 
-### Case 7: Adding Request Logging
+### 场景 7: 添加请求日志
 
 #### templates/api-function.template
 
@@ -240,7 +240,7 @@ export const {{functionName}} = ({{params}}) => {
 
 ```
 
-### Case 8: Using More Concise Imports (Type-only imports)
+### 场景 8: 使用更简洁的导入（只导入类型）
 
 #### templates/index-header.template
 
@@ -267,50 +267,50 @@ export const {{functionName}} = ({{params}}) =>
 
 ```
 
-## 📝 Template Variable Reference
+## 📝 模板变量说明
 
-### api-function.template Available Variables
+### api-function.template 可用变量
 
-| Variable | Type | Description | Example |
-| --- | --- | --- | --- |
-| `{{summary}}` | string | API description | "Query user list" |
-| `{{functionName}}` | string | Function name | "listUsers" |
-| `{{params}}` | string | Function parameters | "query?: UserQuery" |
-| `{{paramName}}` | string | Parameter comment | "\* @param query" |
-| `{{returnType}}` | string | Return type | "UserVO[]" |
-| `{{url}}` | string | Request URL | "'/api/users'" |
-| `{{method}}` | string | HTTP method | "get" |
-| `{{hasReturns}}` | boolean | Has return value | true/false |
-| `{{hasData}}` | boolean | Has body data | true/false |
-| `{{dataParam}}` | string | Body parameter name | "data" |
-| `{{hasParams}}` | boolean | Has query parameters | true/false |
-| `{{paramsParam}}` | string | Query parameter name | "query" |
+| 变量               | 类型    | 说明              | 示例                |
+| ------------------ | ------- | ----------------- | ------------------- |
+| `{{summary}}`      | string  | API 描述          | "查询用户列表"      |
+| `{{functionName}}` | string  | 函数名            | "listUsers"         |
+| `{{params}}`       | string  | 函数参数          | "query?: UserQuery" |
+| `{{paramName}}`    | string  | 参数注释          | "\* @param query"   |
+| `{{returnType}}`   | string  | 返回类型          | "UserVO[]"          |
+| `{{url}}`          | string  | 请求 URL          | "'/api/users'"      |
+| `{{method}}`       | string  | HTTP 方法         | "get"               |
+| `{{hasReturns}}`   | boolean | 是否有返回值      | true/false          |
+| `{{hasData}}`      | boolean | 是否有 body 数据  | true/false          |
+| `{{dataParam}}`    | string  | body 参数名       | "data"              |
+| `{{hasParams}}`    | boolean | 是否有 query 参数 | true/false          |
+| `{{paramsParam}}`  | string  | query 参数名      | "query"             |
 
-### index-header.template Available Variables
+### index-header.template 可用变量
 
-| Variable | Type | Description | Example |
-| --- | --- | --- | --- |
-| `{{typeImports}}` | string | Type import list | "UserVO, UserQuery" |
-| `{{typeImportPath}}` | string | Type file path | "./types" |
-| `{{hasTypeImports}}` | boolean | Has type imports | true/false |
+| 变量                 | 类型    | 说明           | 示例                |
+| -------------------- | ------- | -------------- | ------------------- |
+| `{{typeImports}}`    | string  | 类型导入列表   | "UserVO, UserQuery" |
+| `{{typeImportPath}}` | string  | 类型文件路径   | "./types"           |
+| `{{hasTypeImports}}` | boolean | 是否有类型导入 | true/false          |
 
-## 🔧 Template Syntax
+## 🔧 模板语法
 
-### Variable Interpolation
+### 变量插值
 
 ```
 {{variableName}}
 ```
 
-### Conditional Rendering
+### 条件渲染
 
 ```
 {{#condition}}
-  This content is only shown when condition is true
+  这里的内容只在 condition 为 true 时显示
 {{/condition}}
 ```
 
-### Example
+### 示例
 
 ```typescript
 {{#hasData}}
@@ -318,36 +318,36 @@ data: {{dataParam}},
 {{/hasData}}
 ```
 
-If `hasData` is `true`, generates:
+如果 `hasData` 为 `true`，生成：
 
 ```typescript
 data: data,
 ```
 
-If `hasData` is `false`, generates:
+如果 `hasData` 为 `false`，生成：
 
 ```typescript
 
 ```
 
-## 💡 Best Practices
+## 💡 最佳实践
 
-1. **Keep Templates Simple** - Don't add too much business logic in templates
-2. **Use Type Annotations** - Take full advantage of TypeScript's type system
-3. **Consider Team Standards** - Templates should follow team coding conventions
-4. **Version Control** - Include template files in version control to maintain team consistency
-5. **Test Generated Results** - Test the generated code after modifying templates
+1. **保持模板简洁** - 不要在模板中添加过多的业务逻辑
+2. **使用类型注解** - 充分利用 TypeScript 的类型系统
+3. **考虑团队规范** - 模板应该符合团队的代码规范
+4. **版本控制** - 将模板文件加入版本控制，保持团队一致
+5. **测试生成结果** - 修改模板后，及时测试生成的代码是否正确
 
-## 🚀 Quick Template Switching
+## 🚀 快速切换模板
 
-If you need to use different template styles across different projects:
+如果你需要在不同的项目中使用不同的模板风格，可以：
 
-1. **Option 1**: Place templates in the `templates/` directory in your project root
-2. **Option 2**: Create multiple template presets and copy them as needed for projects
-3. **Option 3**: Use different configuration files to manage different template paths
+1. **方案 1**: 将模板放在项目根目录的 `templates/` 中
+2. **方案 2**: 创建多个模板预设，根据项目需要复制使用
+3. **方案 3**: 使用不同的配置文件管理不同的模板路径
 
-## 📚 Related Documentation
+## 📚 相关文档
 
-- [README.md](./README.md) - Complete feature description
-- [QUICKSTART.md](./QUICKSTART.md) - Quick start guide
-- [naming-strategy-examples.md](./naming-strategy-examples.md) - Naming strategy examples
+- [README.md](./README.md) - 完整功能说明
+- [QUICKSTART.md](./QUICKSTART.md) - 快速开始
+- [配置示例](./generate-front-api.config.example.js) - 完整配置参考

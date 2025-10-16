@@ -1,37 +1,37 @@
-# ⚡ Quick Start
+# ⚡ 快速开始
 
-English | [简体中文](./QUICKSTART.zh-CN.md)
+[English](./QUICKSTART.md) | 简体中文
 
-## 🎯 Get Started in One Minute
+## 🎯 一分钟上手
 
-### 1️⃣ Installation
+### 1️⃣ 安装
 
 ```bash
 npm install generate-front-api --save-dev
 ```
 
-### 2️⃣ Create Configuration
+### 2️⃣ 创建配置
 
-Create `generate-front-api.config.js` in your project root:
+在项目根目录创建 `generate-front-api.config.js`：
 
 ```javascript
 export default {
-  // Option 1: Use remote URL
+  // 选项1: 使用远程 URL
   openApiUrl: 'http://your-api.com/v3/api-docs',
   
-  // Option 2: Use local file
+  // 选项2: 使用本地文件
   // openApiFile: 'openApi.json',
 
-  // Output directory
+  // 输出目录
   output: {
     baseDir: 'src/api'
   }
 };
 ```
 
-### 3️⃣ Add Script
+### 3️⃣ 添加脚本
 
-Add to `package.json`:
+在 `package.json` 添加：
 
 ```json
 {
@@ -41,49 +41,49 @@ Add to `package.json`:
 }
 ```
 
-### 4️⃣ Run Generation
+### 4️⃣ 运行生成
 
 ```bash
 npm run api:gen
 ```
 
-🎉 Done! Generated code is in the `src/api` directory.
+🎉 完成！生成的代码在 `src/api` 目录中。
 
 ---
 
-## 📖 More Configuration
+## 📖 更多配置
 
-### Use URL Path Strategy (Recommended)
+### 使用 URL 路径策略（推荐）
 
 ```javascript
 export default {
   openApiUrl: 'http://your-api.com/v3/api-docs',
   output: { baseDir: 'src/api' },
   naming: {
-    namingStrategy: 'path',  // Based on URL path
-    pathDepth: 2             // Path depth
+    namingStrategy: 'path',  // 基于 URL 路径
+    pathDepth: 2             // 路径深度
   }
 };
 ```
 
-**Result:**
+**效果：**
 
 - `/hr/basicManage/medicalOrg` → `src/api/hr/basicManage/`
 - `/staffManage/orgStaff` → `src/api/staffManage/orgStaff/`
 
-### Use Tag Strategy
+### 使用 Tag 策略
 
 ```javascript
 export default {
   openApiUrl: 'http://your-api.com/v3/api-docs',
   output: { baseDir: 'src/api' },
   naming: {
-    namingStrategy: 'tag'  // Use OpenAPI tag
+    namingStrategy: 'tag'  // 使用 OpenAPI tag
   }
 };
 ```
 
-### Custom Type Mapping
+### 自定义类型映射
 
 ```javascript
 export default {
@@ -100,11 +100,11 @@ export default {
 
 ---
 
-## 🎨 Custom Templates
+## 🎨 自定义模板
 
-### API Function Template
+### API 函数模板
 
-Create `templates/api-function.template` in your project root:
+在项目根目录创建 `templates/api-function.template`：
 
 ```typescript
 /**
@@ -119,9 +119,9 @@ export const {{functionName}} = ({{params}}) => {
 };
 ```
 
-### File Header Template
+### 文件头部模板
 
-Create `templates/index-header.template` in your project root:
+在项目根目录创建 `templates/index-header.template`：
 
 ```typescript
 import http from '@/utils/http';
@@ -132,29 +132,29 @@ import http from '@/utils/http';
 
 ---
 
-## 💡 Common Commands
+## 💡 常用命令
 
 ```bash
-# Generate from remote URL
+# 从远程 URL 生成
 npx generate-front-api --url=http://api.example.com/v3/api-docs
 
-# Check files to be published
+# 查看将要发布的文件
 npm pack --dry-run
 
-# Local link for testing
+# 本地链接测试
 npm link
 ```
 
 ---
 
-## 📚 Complete Documentation
+## 📚 完整文档
 
-- [README.md](./README.md) - Complete feature description
-- [TEMPLATE_EXAMPLES.md](./TEMPLATE_EXAMPLES.md) - Template customization examples
-- [naming-strategy-examples.md](./naming-strategy-examples.md) - Naming strategy guide
+- [README.md](./README.md) - 完整功能说明
+- [USAGE.md](./USAGE.md) - 详细使用指南
+- [配置示例](./generate-front-api.config.example.js) - 完整配置参考
 
 ---
 
-## ❓ Having Issues?
+## ❓ 遇到问题？
 
-Check [FAQ](./README.md#-faq) or submit an [Issue](https://github.com/huanlirui/generate-front-api/issues)
+查看 [常见问题](./README.md#-常见问题) 或提交 [Issue](https://github.com/huanlirui/generate-front-api/issues)

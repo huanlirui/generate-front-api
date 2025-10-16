@@ -1,69 +1,71 @@
 # generate-front-api
 
-基于 OpenAPI 规范自动生成 TypeScript API 请求代码和类型定义的工具。
+English | [简体中文](./README.zh-CN.md)
 
-## ✨ 功能特性
+A tool to automatically generate TypeScript API request code and type definitions based on OpenAPI specifications.
 
-- ✅ 根据 OpenAPI JSON 自动生成 TypeScript 类型定义
-- ✅ 自动生成 API 请求函数
-- ✅ **智能类型推断** - 自动从响应中提取准确类型,避免 `any`
-- ✅ **可配置** - 支持自定义配置文件
-- ✅ **单一模板系统** - 使用统一模板文件,易于自定义
-- ✅ 智能类型映射,只导入使用到的类型
-- ✅ 自动代码格式化(Prettier)
-- ✅ **响应包装类型解析** - 自动解析 `RVoid`、`RList*`、`R*` 等包装类型
-- ✅ **多模块生成** - 根据 OpenAPI tag 自动分组,生成独立模块文件夹
-- ✅ **唯一函数名** - 基于 URL 路径和 HTTP 方法生成唯一函数名
-- ✅ **支持远程获取** - 可从 URL 直接获取 OpenAPI JSON
+## ✨ Features
 
-## 📦 安装
+- ✅ Automatically generate TypeScript type definitions from OpenAPI JSON
+- ✅ Automatically generate API request functions
+- ✅ **Smart Type Inference** - Automatically extract accurate types from responses, avoiding `any`
+- ✅ **Configurable** - Support custom configuration files
+- ✅ **Unified Template System** - Use unified template files for easy customization
+- ✅ Smart type mapping, only import used types
+- ✅ Automatic code formatting (Prettier)
+- ✅ **Response Wrapper Type Parsing** - Automatically parse wrapper types like `RVoid`, `RList*`, `R*`
+- ✅ **Multi-Module Generation** - Automatically group by OpenAPI tags, generate separate module folders
+- ✅ **Unique Function Names** - Generate unique function names based on URL path and HTTP method
+- ✅ **Remote Fetching Support** - Fetch OpenAPI JSON directly from URLs
+
+## 📦 Installation
 
 ```bash
 npm install generate-front-api --save-dev
 ```
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 1. 初始化配置
+### 1. Initialize Configuration
 
-在项目根目录创建配置文件 `generate-front-api.config.js`:
+Create a configuration file `generate-front-api.config.js` in your project root:
 
 ```javascript
 export default {
-  // OpenAPI 数据源 - 选择其中一种方式
-  openApiFile: 'openApi.json',  // 方式1: 本地文件
-  // openApiUrl: 'https://api.example.com/v3/api-docs',  // 方式2: 远程URL
+  // OpenAPI data source - choose one method
+  openApiFile: 'openApi.json',  // Method 1: Local file
+  // openApiUrl: 'https://api.example.com/v3/api-docs',  // Method 2: Remote URL
 
-  // 输出配置
+  // Output configuration
   output: {
-    baseDir: 'src/api'  // 生成代码的目录
+    baseDir: 'src/api'  // Directory for generated code
   },
 
-  // 命名策略: 'path' | 'tag' | 'tagMapping'
+  // Naming strategy: 'path' | 'tag' | 'tagMapping'
   naming: {
-    namingStrategy: 'path',  // 推荐使用 path 策略
-    pathDepth: 2  // URL 路径深度
+    namingStrategy: 'path',  // Recommended: use path strategy
+    pathDepth: 2  // URL path depth
   }
 };
 ```
 
-### 2. 准备 OpenAPI 数据源
+### 2. Prepare OpenAPI Data Source
 
-**方式 1: 使用本地文件**
+**Method 1: Use Local File**
 
-将 OpenAPI JSON 文件放到项目根目录，命名为 `openApi.json`
+Place the OpenAPI JSON file in your project root, named `openApi.json`
 
-**方式 2: 从 URL 获取**
+**Method 2: Fetch from URL**
 
-在配置文件中设置 `openApiUrl`，或通过命令行参数指定：
+Set `openApiUrl` in the configuration file, or specify via command line:
 
 ```bash
 npx generate-front-api --url=https://api.example.com/v3/api-docs
 ```
 
-### 3. 添加 npm 脚本
+### 3. Add npm Script
 
-在 `package.json` 中添加：
+Add to `package.json`:
 
 ```json
 {
@@ -73,15 +75,15 @@ npx generate-front-api --url=https://api.example.com/v3/api-docs
 }
 ```
 
-### 4. 运行生成器
+### 4. Run Generator
 
 ```bash
 npm run generate:api
 ```
 
-生成的文件会输出到配置的 `baseDir` 目录中。
+The generated files will be output to the configured `baseDir` directory.
 
-## 📁 生成结果示例
+## 📁 Generated Output Example
 
 ```
 src/api/
@@ -98,28 +100,28 @@ src/api/
 │       └── types.ts
 ```
 
-### types.ts 示例
+### types.ts Example
 
 ```typescript
 export interface OrgDeptVO {
   /**
-   * 主键
+   * Primary key
    */
   id?: string | number;
 
   /**
-   * 科室编码
+   * Department code
    */
   deptCode?: string;
 }
 
 export interface OrgDeptQuery {
-  /** 科室编码 */
+  /** Department code */
   deptCode?: string;
 }
 ```
 
-### index.ts 示例
+### index.ts Example
 
 ```typescript
 import request from '@/utils/request';
@@ -127,7 +129,7 @@ import { AxiosPromise } from 'axios';
 import { OrgDeptVO, OrgDeptQuery } from './types';
 
 /**
- * 查询列表
+ * Query list
  * @param query
  * @returns {*}
  */
@@ -140,47 +142,47 @@ export const listOrgDept = (query?: OrgDeptQuery): AxiosPromise<OrgDeptVO[]> => 
 };
 ```
 
-## ⚙️ 配置说明
+## ⚙️ Configuration
 
-### 完整配置示例
+### Complete Configuration Example
 
 ```javascript
 export default {
-  // OpenAPI 数据源配置
-  openApiFile: 'openApi.json',  // 本地文件路径
-  openApiUrl: null,  // 远程 URL（优先级高于 openApiFile）
+  // OpenAPI data source configuration
+  openApiFile: 'openApi.json',  // Local file path
+  openApiUrl: null,  // Remote URL (higher priority than openApiFile)
 
-  // 输出配置
+  // Output configuration
   output: {
-    baseDir: 'src/api'  // 生成代码的基础目录
+    baseDir: 'src/api'  // Base directory for generated code
   },
 
-  // 命名配置
+  // Naming configuration
   naming: {
-    voSuffix: 'VO',        // 视图对象后缀
-    formSuffix: 'Form',    // 表单对象后缀
-    querySuffix: 'Query',  // 查询对象后缀
+    voSuffix: 'VO',        // View object suffix
+    formSuffix: 'Form',    // Form object suffix
+    querySuffix: 'Query',  // Query object suffix
 
-    // 命名策略
-    // - 'path': 使用 URL 路径作为目录名（推荐）
-    // - 'tag': 使用 OpenAPI tag 作为目录名
-    // - 'tagMapping': 使用自定义映射表
+    // Naming strategy
+    // - 'path': Use URL path as directory name (recommended)
+    // - 'tag': Use OpenAPI tag as directory name
+    // - 'tagMapping': Use custom mapping table
     namingStrategy: 'path',
 
-    // 路径深度（namingStrategy='path' 时生效）
+    // Path depth (effective when namingStrategy='path')
     pathDepth: 2,
 
-    // Tag 映射表（namingStrategy='tagMapping' 时生效）
+    // Tag mapping table (effective when namingStrategy='tagMapping')
     tagMapping: {
-      '人力资源-基础管理': 'hr/basicManage',
-      '部门管理': 'deptManage/orgDept',
+      'Human Resources-Basic Management': 'hr/basicManage',
+      'Department Management': 'deptManage/orgDept',
       'default': 'common'
     }
   },
 
-  // 类型配置
+  // Type configuration
   types: {
-    // 基础类型映射
+    // Basic type mapping
     typeMapping: {
       integer: 'number',
       string: 'string',
@@ -191,51 +193,51 @@ export default {
       long: 'string | number'
     },
 
-    // 是否将 int64 转换为 string | number
+    // Convert int64 to string | number
     int64AsUnion: true,
 
-    // 排除的字段
+    // Excluded fields
     excludeFields: []
   },
 
-  // 格式化配置
+  // Formatting configuration
   formatting: {
-    runPrettier: true  // 是否运行 Prettier 格式化
+    runPrettier: true  // Run Prettier formatting
   },
 
-  // 生命周期钩子
+  // Lifecycle hooks
   hooks: {
     beforeGenerate: (openApiData) => {
-      console.log(`开始生成 API: ${openApiData.info?.title}`);
+      console.log(`Starting API generation: ${openApiData.info?.title}`);
     },
     afterGenerate: (result) => {
-      console.log(`生成完成，共 ${result.moduleCount} 个模块`);
+      console.log(`Generation complete, ${result.moduleCount} modules created`);
     }
   }
 };
 ```
 
-### 命名策略说明
+### Naming Strategy Explanation
 
-#### 1. path 策略（推荐）
+#### 1. path Strategy (Recommended)
 
-直接使用 URL 路径作为目录名，自动化且生成英文目录：
+Use URL path directly as directory name, automated with English directories:
 
 ```javascript
 naming: {
   namingStrategy: 'path',
-  pathDepth: 2  // URL 深度
+  pathDepth: 2  // URL depth
 }
 ```
 
-示例：
+Examples:
 
 - `/hr/basicManage/medicalOrg` → `src/api/hr/basicManage/`
 - `/staffManage/orgStaff` → `src/api/staffManage/orgStaff/`
 
-#### 2. tag 策略
+#### 2. tag Strategy
 
-使用 OpenAPI 的 `tags` 字段作为目录名：
+Use OpenAPI `tags` field as directory name:
 
 ```javascript
 naming: {
@@ -243,31 +245,31 @@ naming: {
 }
 ```
 
-示例：
+Examples:
 
-- `tags: ["医疗机构"]` → `src/api/医疗机构/`
+- `tags: ["Medical Organization"]` → `src/api/Medical Organization/`
 
-#### 3. tagMapping 策略
+#### 3. tagMapping Strategy
 
-使用自定义映射表：
+Use custom mapping table:
 
 ```javascript
 naming: {
   namingStrategy: 'tagMapping',
   tagMapping: {
-    '人力资源-基础管理': 'hr/basicManage',
+    'Human Resources-Basic Management': 'hr/basicManage',
     'default': 'common'
   }
 }
 ```
 
-## 🎨 自定义模板
+## 🎨 Custom Templates
 
-生成器支持两个可自定义的模板文件，你可以在项目根目录创建 `templates/` 目录并放置自定义模板。
+The generator supports two customizable template files. You can create a `templates/` directory in your project root and place custom templates.
 
-### API 函数模板
+### API Function Template
 
-在项目根目录创建 `templates/api-function.template` 来自定义生成的 API 函数格式：
+Create `templates/api-function.template` in your project root to customize the generated API function format:
 
 ```typescript
 /**
@@ -285,24 +287,24 @@ export const {{functionName}} = ({{params}}): AxiosPromise<{{returnType}}> => {
 };
 ```
 
-### 可用模板变量
+### Available Template Variables
 
-| 变量名 | 说明 | 示例值 |
-|-------|------|-------|
-| `{{summary}}` | API 描述 | "查询列表" |
-| `{{functionName}}` | 函数名 | "listOrgDept" |
-| `{{params}}` | 函数参数 | "query?: OrgDeptQuery" |
-| `{{returnType}}` | 返回类型 | "OrgDeptVO[]" |
-| `{{url}}` | 请求 URL | "'/api/list'" |
-| `{{method}}` | HTTP 方法 | "get", "post" |
-| `{{hasData}}` | 是否有 data 参数 | true/false |
-| `{{hasParams}}` | 是否有 params 参数 | true/false |
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `{{summary}}` | API description | "Query list" |
+| `{{functionName}}` | Function name | "listOrgDept" |
+| `{{params}}` | Function parameters | "query?: OrgDeptQuery" |
+| `{{returnType}}` | Return type | "OrgDeptVO[]" |
+| `{{url}}` | Request URL | "'/api/list'" |
+| `{{method}}` | HTTP method | "get", "post" |
+| `{{hasData}}` | Has data parameter | true/false |
+| `{{hasParams}}` | Has params parameter | true/false |
 
-### 文件头部模板
+### File Header Template
 
-在项目根目录创建 `templates/index-header.template` 来自定义生成文件的导入语句：
+Create `templates/index-header.template` in your project root to customize import statements in generated files:
 
-**默认模板内容**:
+**Default Template Content**:
 
 ```typescript
 import request from '@/utils/request';
@@ -312,15 +314,15 @@ import { AxiosPromise } from 'axios';
 
 ```
 
-**可用变量**:
+**Available Variables**:
 
-| 变量名 | 说明 | 示例值 |
-|-------|------|-------|
-| `{{typeImports}}` | 类型导入列表 | "UserVO, UserQuery" |
-| `{{typeImportPath}}` | 类型文件路径 | "./types" |
-| `{{hasTypeImports}}` | 是否有类型导入 | true/false |
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `{{typeImports}}` | Type import list | "UserVO, UserQuery" |
+| `{{typeImportPath}}` | Type file path | "./types" |
+| `{{hasTypeImports}}` | Has type imports | true/false |
 
-**自定义示例** - 使用自定义 HTTP 客户端：
+**Custom Example** - Using custom HTTP client:
 
 ```typescript
 import http from '@/utils/http';
@@ -330,50 +332,50 @@ import type { ResponsePromise } from '@/types';
 
 ```
 
-## 🔧 函数命名规则
+## 🔧 Function Naming Rules
 
-生成器会基于 URL 路径和 HTTP 方法自动生成函数名：
+The generator automatically generates function names based on URL path and HTTP method:
 
-| URL 示例 | HTTP 方法 | 生成函数名 |
-|---------|---------|-----------|
+| URL Example | HTTP Method | Generated Function Name |
+|------------|-------------|------------------------|
 | `/hr/medicalOrg/list` | GET | `listMedicalOrgList` |
 | `/hr/medicalOrg/{id}` | GET | `getMedicalOrg` |
 | `/deptManage/orgDept` | POST | `addDeptManageOrgDept` |
 | `/deptManage/orgDept` | PUT | `updateDeptManageOrgDept` |
 | `/deptManage/orgDept/{id}` | DELETE | `delDeptManageOrgDept` |
 
-命名规则：
+Naming Rules:
 
 - GET + `/list` → `list{Entity}List`
 - GET + `/{param}` → `get{Entity}`
-- GET (其他) → `query{Entity}`
+- GET (others) → `query{Entity}`
 - POST → `add{Entity}`
 - PUT → `update{Entity}`
 - DELETE → `del{Entity}`
 
-## 📝 使用场景
+## 📝 Use Cases
 
-### 场景 1: 本地开发
+### Case 1: Local Development
 
 ```bash
-# 1. 创建配置文件
+# 1. Create configuration file
 echo "export default { openApiFile: 'openApi.json', output: { baseDir: 'src/api' } };" > generate-front-api.config.js
 
-# 2. 运行生成
+# 2. Run generation
 npm run generate:api
 ```
 
-### 场景 2: 从远程获取
+### Case 2: Fetch from Remote
 
 ```bash
-# 通过命令行参数
+# Via command line parameter
 npx generate-front-api --url=https://api.example.com/v3/api-docs
 
-# 或在配置文件中设置
+# Or set in configuration file
 # openApiUrl: 'https://api.example.com/v3/api-docs'
 ```
 
-### 场景 3: 集成到 CI/CD
+### Case 3: Integrate into CI/CD
 
 ```json
 {
@@ -384,33 +386,33 @@ npx generate-front-api --url=https://api.example.com/v3/api-docs
 }
 ```
 
-## 🤔 常见问题
+## 🤔 FAQ
 
-### Q: 如何修改生成的目录结构?
+### Q: How to modify the generated directory structure?
 
-A: 修改配置文件中的 `naming.namingStrategy` 和 `naming.pathDepth`。
+A: Modify `naming.namingStrategy` and `naming.pathDepth` in the configuration file.
 
-### Q: 如何自定义类型映射?
+### Q: How to customize type mapping?
 
-A: 在配置文件的 `types.typeMapping` 中添加自定义映射。
+A: Add custom mappings in `types.typeMapping` in the configuration file.
 
-### Q: 如何禁用 Prettier 格式化?
+### Q: How to disable Prettier formatting?
 
-A: 设置 `formatting.runPrettier: false`。
+A: Set `formatting.runPrettier: false`.
 
-### Q: 生成的代码中有不需要的字段?
+### Q: There are unwanted fields in the generated code?
 
-A: 在 `types.excludeFields` 数组中添加字段名。
+A: Add field names to the `types.excludeFields` array.
 
 ## 📄 License
 
 MIT
 
-## 🤝 贡献
+## 🤝 Contributing
 
-欢迎提交 Issue 和 Pull Request！
+Issues and Pull Requests are welcome!
 
-## 🔗 相关链接
+## 🔗 Related Links
 
 - [GitHub](https://github.com/huanlirui/generate-front-api)
 - [Issues](https://github.com/huanlirui/generate-front-api/issues)
