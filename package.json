@@ -1,7 +1,7 @@
 {
   "name": "generate-front-api",
-  "version": "1.0.0",
-  "description": "基于 OpenAPI 规范自动生成 TypeScript API 请求代码和类型定义的工具",
+  "version": "1.0.1",
+  "description": "A tool to automatically generate TypeScript API request code and type definitions based on OpenAPI specifications | 基于 OpenAPI 规范自动生成 TypeScript API 请求代码和类型定义的工具",
   "main": "lib/generator.js",
   "type": "module",
   "bin": {
@@ -14,8 +14,15 @@
     "bin",
     "lib",
     "README.md",
+    "README.zh-CN.md",
     "QUICKSTART.md",
-    "CHANGELOG.md"
+    "QUICKSTART.zh-CN.md",
+    "TEMPLATE_EXAMPLES.md",
+    "TEMPLATE_EXAMPLES.zh-CN.md",
+    "naming-strategy-examples.md",
+    "naming-strategy-examples.zh-CN.md",
+    "CHANGELOG.md",
+    "CHANGELOG.zh-CN.md"
   ],
   "repository": {
     "type": "git",
