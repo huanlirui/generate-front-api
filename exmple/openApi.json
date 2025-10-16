@@ -1,0 +1,2331 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "检查检验互认",
+        "description": "",
+        "version": "1.0.0"
+    },
+    "tags": [
+        {
+            "name": "XX机构"
+        }
+    ],
+    "paths": {
+        "/hr/basicManage/medicalOrg": {
+            "put": {
+                "summary": "机构信息修改",
+                "deprecated": false,
+                "description": "修改机构信息",
+                "operationId": "edit",
+                "tags": [
+                    "XX机构"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "客户端ID用于控制token过期、续期等操作",
+                        "required": true,
+                        "example": "{{Authorization}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Clientid",
+                        "in": "header",
+                        "description": "认证token",
+                        "required": true,
+                        "example": "{{Clientid}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "deptId": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "description": "机构ID"
+                                    },
+                                    "parentId": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "description": "所属父机构【管理机构】ID"
+                                    },
+                                    "deptName": {
+                                        "type": "string",
+                                        "description": "部门名称",
+                                        "format": "string"
+                                    },
+                                    "admCode": {
+                                        "type": "string",
+                                        "description": "行政区划代码",
+                                        "format": "string"
+                                    },
+                                    "admName": {
+                                        "type": "string",
+                                        "description": "行政区划名称",
+                                        "format": "string"
+                                    },
+                                    "orgCode": {
+                                        "type": "string",
+                                        "description": "机构编码，唯一标识",
+                                        "format": "string"
+                                    },
+                                    "medicalInsCode": {
+                                        "type": "string",
+                                        "description": "定点XX机构代码",
+                                        "format": "string"
+                                    },
+                                    "unifiedSocialCreditCode": {
+                                        "type": "string",
+                                        "description": "统一社会信用代码",
+                                        "format": "string"
+                                    },
+                                    "hospitalLevel": {
+                                        "type": "string",
+                                        "description": "医院等级",
+                                        "format": "string",
+                                        "enum": [
+                                            "3T",
+                                            "3A",
+                                            "3B",
+                                            "3C",
+                                            "2A",
+                                            "2B",
+                                            "2C",
+                                            "1A",
+                                            "1B",
+                                            "1C"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "3T": "三级特等",
+                                                "3A": "三级甲等",
+                                                "3B": "三级乙等",
+                                                "3C": "三级丙等",
+                                                "2A": "二级甲等",
+                                                "2B": "二级乙等",
+                                                "2C": "二级丙等",
+                                                "1A": "一级甲等",
+                                                "1B": "一级乙等",
+                                                "1C": "一级丙等"
+                                            }
+                                        }
+                                    },
+                                    "provinceCity": {
+                                        "type": "string",
+                                        "description": "所属省市中文",
+                                        "format": "string"
+                                    },
+                                    "districtCounty": {
+                                        "type": "string",
+                                        "description": "所属区县中文",
+                                        "format": "string"
+                                    },
+                                    "deptCategory": {
+                                        "type": "string",
+                                        "description": "机构类别编码",
+                                        "format": "string"
+                                    },
+                                    "leader": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "description": "负责人"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "description": "联系电话",
+                                        "format": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "邮箱",
+                                        "format": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "description": "机构状态:0正常,1停用",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "正常",
+                                                "1": "停用"
+                                            }
+                                        }
+                                    },
+                                    "orgShortName": {
+                                        "type": "string",
+                                        "description": "机构简称",
+                                        "format": "string"
+                                    },
+                                    "hrScope": {
+                                        "type": "string",
+                                        "description": "互认范围：全国HR，本省HR，昆明HR",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1",
+                                            "2"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "全国HR",
+                                                "1": "云南省HR",
+                                                "2": "昆明市HR"
+                                            }
+                                        }
+                                    },
+                                    "hrValidStartTime": {
+                                        "type": "string",
+                                        "description": "互认资质有效开始时间",
+                                        "format": "date-time",
+                                        "examples": [
+                                            "2023-01-01 00:00:00"
+                                        ]
+                                    },
+                                    "hrValidEndTime": {
+                                        "type": "string",
+                                        "description": "互认资质有效结束时间",
+                                        "format": "date-time",
+                                        "examples": [
+                                            "2025-12-31 23:59:59"
+                                        ]
+                                    },
+                                    "hrStatus": {
+                                        "type": "string",
+                                        "description": "互认状态",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1",
+                                            "2"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "具有互认资格",
+                                                "1": "监管警示",
+                                                "2": "无互认资格"
+                                            }
+                                        }
+                                    },
+                                    "medicalBelongType": {
+                                        "type": "string",
+                                        "description": "XX机构所有制类型",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "公立医院",
+                                                "1": "民营医院"
+                                            }
+                                        }
+                                    },
+                                    "medicalServiceType": {
+                                        "type": "string",
+                                        "description": "XX机构服务类型",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1",
+                                            "2",
+                                            "3",
+                                            "4"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "综合医院",
+                                                "1": "专科医院",
+                                                "2": "中医医院",
+                                                "3": "基层XX机构",
+                                                "4": "诊所/门诊部"
+                                            }
+                                        }
+                                    },
+                                    "medicalFlag": {
+                                        "type": "string",
+                                        "description": "XX机构标识",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1",
+                                            "2",
+                                            "3",
+                                            "4"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "独立XX机构",
+                                                "1": "院区",
+                                                "2": "分院",
+                                                "3": "下属XX机构",
+                                                "4": "附属/直属机构"
+                                            }
+                                        }
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "机构类型（0：管理机构、1：XX机构）",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "管理机构",
+                                                "1": "XX机构"
+                                            }
+                                        }
+                                    },
+                                    "orderNum": {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "description": "显示顺序"
+                                    },
+                                    "campusCode": {
+                                        "type": "string",
+                                        "description": "园区编码",
+                                        "format": "string"
+                                    },
+                                    "campusName": {
+                                        "type": "string",
+                                        "description": "院区名称",
+                                        "format": "string"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "description": "详细地址",
+                                        "format": "string"
+                                    },
+                                    "labels": {
+                                        "type": "string",
+                                        "description": "互认标签列表",
+                                        "format": "string"
+                                    }
+                                },
+                                "required": [
+                                    "deptId",
+                                    "parentId",
+                                    "deptName",
+                                    "admCode",
+                                    "orgCode",
+                                    "medicalInsCode",
+                                    "hospitalLevel",
+                                    "hrScope",
+                                    "hrStatus",
+                                    "medicalBelongType",
+                                    "medicalServiceType",
+                                    "medicalFlag",
+                                    "type"
+                                ]
+                            },
+                            "examples": [
+                                {
+                                    "value": "",
+                                    "mediaType": "application/json",
+                                    "description": ""
+                                }
+                            ]
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RVoid"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    },
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            },
+            "post": {
+                "summary": "机构信息新增",
+                "deprecated": false,
+                "description": "新增机构",
+                "operationId": "add",
+                "tags": [
+                    "XX机构"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "客户端ID用于控制token过期、续期等操作",
+                        "required": true,
+                        "example": "{{Authorization}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Clientid",
+                        "in": "header",
+                        "description": "认证token",
+                        "required": true,
+                        "example": "{{Clientid}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "parentId": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "description": "所属父机构【管理机构】ID"
+                                    },
+                                    "deptName": {
+                                        "type": "string",
+                                        "description": "部门名称",
+                                        "format": "string"
+                                    },
+                                    "admCode": {
+                                        "type": "string",
+                                        "description": "行政区划代码",
+                                        "format": "string"
+                                    },
+                                    "admName": {
+                                        "type": "string",
+                                        "description": "行政区划名称",
+                                        "format": "string"
+                                    },
+                                    "orgCode": {
+                                        "type": "string",
+                                        "description": "机构编码，唯一标识",
+                                        "format": "string"
+                                    },
+                                    "medicalInsCode": {
+                                        "type": "string",
+                                        "description": "定点XX机构代码",
+                                        "format": "string"
+                                    },
+                                    "unifiedSocialCreditCode": {
+                                        "type": "string",
+                                        "description": "统一社会信用代码",
+                                        "format": "string"
+                                    },
+                                    "hospitalLevel": {
+                                        "type": "string",
+                                        "description": "医院等级",
+                                        "format": "string",
+                                        "enum": [
+                                            "3T",
+                                            "3A",
+                                            "3B",
+                                            "3C",
+                                            "2A",
+                                            "2B",
+                                            "2C",
+                                            "1A",
+                                            "1B",
+                                            "1C"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "3T": "三级特等",
+                                                "3A": "三级甲等",
+                                                "3B": "三级乙等",
+                                                "3C": "三级丙等",
+                                                "2A": "二级甲等",
+                                                "2B": "二级乙等",
+                                                "2C": "二级丙等",
+                                                "1A": "一级甲等",
+                                                "1B": "一级乙等",
+                                                "1C": "一级丙等"
+                                            }
+                                        }
+                                    },
+                                    "provinceCity": {
+                                        "type": "string",
+                                        "description": "所属省市中文",
+                                        "format": "string"
+                                    },
+                                    "districtCounty": {
+                                        "type": "string",
+                                        "description": "所属区县中文",
+                                        "format": "string"
+                                    },
+                                    "deptCategory": {
+                                        "type": "string",
+                                        "description": "机构类别编码",
+                                        "format": "string"
+                                    },
+                                    "leader": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "description": "负责人"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "description": "联系电话",
+                                        "format": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "邮箱",
+                                        "format": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "description": "机构状态:0正常,1停用",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "正常",
+                                                "1": "停用"
+                                            }
+                                        }
+                                    },
+                                    "orgShortName": {
+                                        "type": "string",
+                                        "description": "机构简称",
+                                        "format": "string"
+                                    },
+                                    "hrScope": {
+                                        "type": "string",
+                                        "description": "互认范围：全国HR，本省HR，昆明HR",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1",
+                                            "2"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "全国HR",
+                                                "1": "云南省HR",
+                                                "2": "昆明市HR"
+                                            }
+                                        }
+                                    },
+                                    "hrValidStartTime": {
+                                        "type": "string",
+                                        "description": "互认资质有效开始时间",
+                                        "format": "date-time",
+                                        "examples": [
+                                            "2023-01-01 00:00:00"
+                                        ]
+                                    },
+                                    "hrValidEndTime": {
+                                        "type": "string",
+                                        "description": "互认资质有效结束时间",
+                                        "format": "date-time",
+                                        "examples": [
+                                            "2025-12-31 23:59:59"
+                                        ]
+                                    },
+                                    "hrStatus": {
+                                        "type": "string",
+                                        "description": "互认状态",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1",
+                                            "2"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "具有互认资格",
+                                                "1": "监管警示",
+                                                "2": "无互认资格"
+                                            }
+                                        }
+                                    },
+                                    "medicalBelongType": {
+                                        "type": "string",
+                                        "description": "XX机构所有制类型",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "公立医院",
+                                                "1": "民营医院"
+                                            }
+                                        }
+                                    },
+                                    "medicalServiceType": {
+                                        "type": "string",
+                                        "description": "XX机构服务类型",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1",
+                                            "2",
+                                            "3",
+                                            "4"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "综合医院",
+                                                "1": "专科医院",
+                                                "2": "中医医院",
+                                                "3": "基层XX机构",
+                                                "4": "诊所/门诊部"
+                                            }
+                                        }
+                                    },
+                                    "medicalFlag": {
+                                        "type": "string",
+                                        "description": "XX机构标识",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1",
+                                            "2",
+                                            "3",
+                                            "4"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "独立XX机构",
+                                                "1": "院区",
+                                                "2": "分院",
+                                                "3": "下属XX机构",
+                                                "4": "附属/直属机构"
+                                            }
+                                        }
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "机构类型（0：管理机构、1：XX机构）",
+                                        "format": "string",
+                                        "enum": [
+                                            "0",
+                                            "1"
+                                        ],
+                                        "x-apifox": {
+                                            "enumDescriptions": {
+                                                "0": "管理机构",
+                                                "1": "XX机构"
+                                            }
+                                        }
+                                    },
+                                    "orderNum": {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "description": "显示顺序"
+                                    },
+                                    "campusCode": {
+                                        "type": "string",
+                                        "description": "园区编码",
+                                        "format": "string"
+                                    },
+                                    "campusName": {
+                                        "type": "string",
+                                        "description": "院区名称",
+                                        "format": "string"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "description": "详细地址",
+                                        "format": "string"
+                                    },
+                                    "labels": {
+                                        "type": "string",
+                                        "description": "互认标签列表",
+                                        "format": "string"
+                                    }
+                                },
+                                "required": [
+                                    "parentId",
+                                    "deptName",
+                                    "admCode",
+                                    "orgCode",
+                                    "medicalInsCode",
+                                    "hospitalLevel",
+                                    "hrScope",
+                                    "hrStatus",
+                                    "medicalBelongType",
+                                    "medicalServiceType",
+                                    "medicalFlag",
+                                    "type"
+                                ]
+                            },
+                            "examples": [
+                                {
+                                    "value": "",
+                                    "mediaType": "application/json",
+                                    "description": ""
+                                }
+                            ]
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RVoid"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    },
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            },
+            "delete": {
+                "summary": "机构信息删除/批量删除",
+                "deprecated": false,
+                "description": "删除/批量删除XX机构",
+                "operationId": "remove",
+                "tags": [
+                    "XX机构"
+                ],
+                "parameters": [
+                    {
+                        "name": "deptIds",
+                        "in": "query",
+                        "description": "XX机构ID",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "客户端ID用于控制token过期、续期等操作",
+                        "required": true,
+                        "example": "{{Authorization}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Clientid",
+                        "in": "header",
+                        "description": "认证token",
+                        "required": true,
+                        "example": "{{Clientid}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RVoid"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    },
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/hr/basicManage/medicalOrg/importWithOptions": {
+            "post": {
+                "summary": "excel批量导入",
+                "deprecated": false,
+                "description": "excel批量导入",
+                "operationId": "importWithOptions",
+                "tags": [
+                    "XX机构"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "客户端ID用于控制token过期、续期等操作",
+                        "required": true,
+                        "example": "{{Authorization}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Clientid",
+                        "in": "header",
+                        "description": "认证token",
+                        "required": true,
+                        "example": "{{Clientid}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "example": "",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "required": [
+                                    "file"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RVoid"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    },
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    },
+                    "500": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/hr/basicManage/medicalOrg/{orgId}": {
+            "get": {
+                "summary": "机构信息详情查询",
+                "deprecated": false,
+                "description": "查询机构详情",
+                "operationId": "getInfo",
+                "tags": [
+                    "XX机构"
+                ],
+                "parameters": [
+                    {
+                        "name": "orgId",
+                        "in": "path",
+                        "description": "机构ID",
+                        "required": true,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "客户端ID用于控制token过期、续期等操作",
+                        "required": true,
+                        "example": "{{Authorization}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Clientid",
+                        "in": "header",
+                        "description": "认证token",
+                        "required": true,
+                        "example": "{{Clientid}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RMedicalOrgVo"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    },
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/hr/basicManage/medicalOrg/list": {
+            "get": {
+                "summary": "机构信息分页查询",
+                "deprecated": false,
+                "description": "获取机构列表",
+                "operationId": "list",
+                "tags": [
+                    "XX机构"
+                ],
+                "parameters": [
+                    {
+                        "name": "deptId",
+                        "in": "query",
+                        "description": "机构ID",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "parentId",
+                        "in": "query",
+                        "description": "所属机构ID",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "deptName",
+                        "in": "query",
+                        "description": "部门名称",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "admCode",
+                        "in": "query",
+                        "description": "行政区划代码",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "admName",
+                        "in": "query",
+                        "description": "行政区划名称",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orgCode",
+                        "in": "query",
+                        "description": "机构编码，唯一标识",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "medicalInsCode",
+                        "in": "query",
+                        "description": "定点XX机构代码",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "unifiedSocialCreditCode",
+                        "in": "query",
+                        "description": "统一社会信用代码",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hospitalLevel",
+                        "in": "query",
+                        "description": "医院等级",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "provinceCity",
+                        "in": "query",
+                        "description": "所属省市中文",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "districtCounty",
+                        "in": "query",
+                        "description": "所属区县中文",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "deptCategory",
+                        "in": "query",
+                        "description": "机构类别编码",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "leader",
+                        "in": "query",
+                        "description": "负责人",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "联系电话",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "邮箱",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "机构状态:0正常,1停用",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orgShortName",
+                        "in": "query",
+                        "description": "机构简称",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hrScope",
+                        "in": "query",
+                        "description": "互认范围：全国HR，本省HR，昆明HR",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hrValidStartTime",
+                        "in": "query",
+                        "description": "互认资质有效开始时间",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hrValidEndTime",
+                        "in": "query",
+                        "description": "互认资质有效结束时间",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hrStatus",
+                        "in": "query",
+                        "description": "互认状态",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "medicalBelongType",
+                        "in": "query",
+                        "description": "XX机构所有制类型",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "medicalServiceType",
+                        "in": "query",
+                        "description": "XX机构服务类型",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "medicalFlag",
+                        "in": "query",
+                        "description": "XX机构标识",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "机构类型（0：管理机构、1：XX机构）",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderNum",
+                        "in": "query",
+                        "description": "显示顺序",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "campusCode",
+                        "in": "query",
+                        "description": "园区编码",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "campusName",
+                        "in": "query",
+                        "description": "院区名称",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "详细地址",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "分页大小",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "当前页数",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "orderByColumn",
+                        "in": "query",
+                        "description": "排序列",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "isAsc",
+                        "in": "query",
+                        "description": "排序的方向desc或者asc",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "客户端ID用于控制token过期、续期等操作",
+                        "required": true,
+                        "example": "{{Authorization}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Clientid",
+                        "in": "header",
+                        "description": "认证token",
+                        "required": true,
+                        "example": "{{Clientid}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TableDataInfoMedicalOrgVo"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    },
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/hr/basicManage/medicalOrg/exportWithOptions": {
+            "get": {
+                "summary": "excel批量导出/导出模板",
+                "deprecated": false,
+                "description": "excel批量导出/导出模板",
+                "operationId": "exportWithOptions",
+                "tags": [
+                    "XX机构"
+                ],
+                "parameters": [
+                    {
+                        "name": "deptIds",
+                        "in": "query",
+                        "description": "组织机构ID",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "客户端ID用于控制token过期、续期等操作",
+                        "required": true,
+                        "example": "{{Authorization}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Clientid",
+                        "in": "header",
+                        "description": "认证token",
+                        "required": true,
+                        "example": "{{Clientid}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        },
+                        "headers": {}
+                    },
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/hr/basicManage/medicalOrg/tree": {
+            "get": {
+                "summary": "机构信息树查询",
+                "deprecated": false,
+                "description": "查询机构树，层级按照管理单位从属来呈现",
+                "operationId": "getOrgTree",
+                "tags": [
+                    "XX机构"
+                ],
+                "parameters": [
+                    {
+                        "name": "createDept",
+                        "in": "query",
+                        "description": "创建部门",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "createBy",
+                        "in": "query",
+                        "description": "创建者",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "createTime",
+                        "in": "query",
+                        "description": "创建时间",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "updateBy",
+                        "in": "query",
+                        "description": "更新者",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "updateTime",
+                        "in": "query",
+                        "description": "更新时间",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "params",
+                        "in": "query",
+                        "description": "请求参数",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "deptId",
+                        "in": "query",
+                        "description": "机构ID",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "parentId",
+                        "in": "query",
+                        "description": "所属机构ID",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "deptName",
+                        "in": "query",
+                        "description": "部门名称",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "admCode",
+                        "in": "query",
+                        "description": "行政区划代码",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "admName",
+                        "in": "query",
+                        "description": "行政区划名称",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orgCode",
+                        "in": "query",
+                        "description": "机构编码，唯一标识",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "medicalInsCode",
+                        "in": "query",
+                        "description": "定点XX机构代码",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "unifiedSocialCreditCode",
+                        "in": "query",
+                        "description": "统一社会信用代码",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hospitalLevel",
+                        "in": "query",
+                        "description": "医院等级",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "provinceCity",
+                        "in": "query",
+                        "description": "所属省市中文",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "districtCounty",
+                        "in": "query",
+                        "description": "所属区县中文",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "deptCategory",
+                        "in": "query",
+                        "description": "机构类别编码",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "leader",
+                        "in": "query",
+                        "description": "负责人",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "联系电话",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "邮箱",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "机构状态:0正常,1停用",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orgShortName",
+                        "in": "query",
+                        "description": "机构简称",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hrScope",
+                        "in": "query",
+                        "description": "互认范围：全国HR，本省HR，昆明HR",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hrValidStartTime",
+                        "in": "query",
+                        "description": "互认资质有效开始时间",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hrValidEndTime",
+                        "in": "query",
+                        "description": "互认资质有效结束时间",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hrStatus",
+                        "in": "query",
+                        "description": "互认状态",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "medicalBelongType",
+                        "in": "query",
+                        "description": "XX机构所有制类型",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "medicalServiceType",
+                        "in": "query",
+                        "description": "XX机构服务类型",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "medicalFlag",
+                        "in": "query",
+                        "description": "XX机构标识",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "机构类型（0：管理机构、1：XX机构）",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderNum",
+                        "in": "query",
+                        "description": "显示顺序",
+                        "required": false,
+                        "example": 0,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "campusCode",
+                        "in": "query",
+                        "description": "园区编码",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "campusName",
+                        "in": "query",
+                        "description": "院区名称",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "详细地址",
+                        "required": false,
+                        "example": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "客户端ID用于控制token过期、续期等操作",
+                        "required": true,
+                        "example": "{{Authorization}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Clientid",
+                        "in": "header",
+                        "description": "认证token",
+                        "required": true,
+                        "example": "{{Clientid}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RListTreeLong"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    },
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TreeNodeConfig": {
+                "type": "object",
+                "properties": {
+                    "idKey": {
+                        "type": "string"
+                    },
+                    "parentIdKey": {
+                        "type": "string"
+                    },
+                    "weightKey": {
+                        "type": "string"
+                    },
+                    "nameKey": {
+                        "type": "string"
+                    },
+                    "childrenKey": {
+                        "type": "string"
+                    },
+                    "deep": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "TreeLong": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "properties": {
+                    "name": {
+                        "type": "object",
+                        "properties": {
+                            "empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "parentId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "config": {
+                        "$ref": "#/components/schemas/TreeNodeConfig"
+                    },
+                    "weight": {
+                        "type": "string"
+                    },
+                    "empty": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "MedicalOrgVo": {
+                "type": "object",
+                "description": "XX机构Vo对象",
+                "properties": {
+                    "orgCode": {
+                        "type": "string",
+                        "description": "机构代码"
+                    },
+                    "orgName": {
+                        "type": "string",
+                        "description": "机构名称"
+                    },
+                    "hospitalLevel": {
+                        "type": "string",
+                        "description": "机构等级"
+                    },
+                    "hospitalLevelName": {
+                        "type": "string",
+                        "description": "机构等级名称"
+                    },
+                    "medicalBelongType": {
+                        "type": "string",
+                        "description": "XX机构所有制类型"
+                    },
+                    "medicalBelongTypeName": {
+                        "type": "string",
+                        "description": "XX机构所有制类型名称"
+                    },
+                    "medicalServiceType": {
+                        "type": "string",
+                        "description": "XX机构服务类型"
+                    },
+                    "medicalServiceTypeName": {
+                        "type": "string",
+                        "description": "XX机构服务类型名称"
+                    },
+                    "medicalFlag": {
+                        "type": "string",
+                        "description": "XX机构标识"
+                    },
+                    "medicalFlagName": {
+                        "type": "string",
+                        "description": "XX机构标识名称"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "机构性质（0管理机构 1XX机构）"
+                    },
+                    "typeName": {
+                        "type": "string",
+                        "description": "机构性质名称"
+                    },
+                    "admCode": {
+                        "type": "string",
+                        "description": "行政区划代码"
+                    },
+                    "admName": {
+                        "type": "string",
+                        "description": "行政区划名称"
+                    },
+                    "hrStatus": {
+                        "type": "string",
+                        "description": "互认状态"
+                    },
+                    "hrStatusName": {
+                        "type": "string",
+                        "description": "互认状态名称"
+                    },
+                    "hrScope": {
+                        "type": "string",
+                        "description": "互认范围：全国HR，本省HR，昆明HR"
+                    },
+                    "hrScopeName": {
+                        "type": "string",
+                        "description": "互认范围中文名称"
+                    },
+                    "serviceType": {
+                        "type": "string",
+                        "description": "XX机构服务类型"
+                    },
+                    "serviceTypeName": {
+                        "type": "string",
+                        "description": "XX机构服务类型名称"
+                    },
+                    "flag": {
+                        "type": "string",
+                        "description": "XX机构标识"
+                    },
+                    "flagName": {
+                        "type": "string",
+                        "description": "XX机构标识名称"
+                    },
+                    "administerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "管辖单位ID"
+                    },
+                    "hrValidStartTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "互认资质有效开始时间"
+                    },
+                    "hrValidEndTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "互认资质有效结束时间"
+                    },
+                    "orgShortName": {
+                        "type": "string",
+                        "description": "机构简称"
+                    },
+                    "provinceCity": {
+                        "type": "string",
+                        "description": "所属省市"
+                    },
+                    "districtCounty": {
+                        "type": "string",
+                        "description": "所属区/县"
+                    },
+                    "medicalInsCode": {
+                        "type": "string",
+                        "description": "定点XX机构代码"
+                    },
+                    "unifiedSocialCreditCode": {
+                        "type": "string",
+                        "description": "统一社会信用代码"
+                    },
+                    "deptId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "部门ID"
+                    },
+                    "parentId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "父部门ID"
+                    },
+                    "deptCategory": {
+                        "type": "string",
+                        "description": "部门类别编码"
+                    },
+                    "orderNum": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "显示顺序"
+                    },
+                    "leader": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "负责人"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "description": "联系电话"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "邮箱"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "机构状态:0正常,1停用"
+                    },
+                    "campusCode": {
+                        "type": "string",
+                        "description": "园区编码"
+                    },
+                    "campusName": {
+                        "type": "string",
+                        "description": "院区名称"
+                    },
+                    "address": {
+                        "type": "string",
+                        "description": "详细地址"
+                    },
+                    "labels": {
+                        "type": "string",
+                        "description": "互认标签列表"
+                    }
+                }
+            },
+            "RListTreeLong": {
+                "type": "object",
+                "description": "响应信息主体",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "msg": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TreeLong"
+                        }
+                    }
+                }
+            },
+            "TableDataInfoMedicalOrgVo": {
+                "type": "object",
+                "description": "表格分页数据对象",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "总记录数"
+                    },
+                    "rows": {
+                        "type": "array",
+                        "description": "列表数据",
+                        "items": {
+                            "$ref": "#/components/schemas/MedicalOrgVo"
+                        }
+                    },
+                    "code": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "消息状态码"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "description": "消息内容"
+                    }
+                }
+            },
+            "MedicalOrgBo": {
+                "type": "object",
+                "description": "XX机构Bo",
+                "properties": {
+                    "createDept": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "创建部门"
+                    },
+                    "createBy": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "创建者"
+                    },
+                    "createTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "创建时间"
+                    },
+                    "updateBy": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "更新者"
+                    },
+                    "updateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "更新时间"
+                    },
+                    "params": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "请求参数",
+                        "format": "object",
+                        "properties": {}
+                    },
+                    "deptId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "机构ID"
+                    },
+                    "parentId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "所属机构ID"
+                    },
+                    "deptName": {
+                        "type": "string",
+                        "description": "部门名称",
+                        "format": "string"
+                    },
+                    "admCode": {
+                        "type": "string",
+                        "description": "行政区划代码",
+                        "format": "string"
+                    },
+                    "admName": {
+                        "type": "string",
+                        "description": "行政区划名称",
+                        "format": "string"
+                    },
+                    "orgCode": {
+                        "type": "string",
+                        "description": "机构编码，唯一标识",
+                        "format": "string"
+                    },
+                    "medicalInsCode": {
+                        "type": "string",
+                        "description": "定点XX机构代码",
+                        "format": "string"
+                    },
+                    "unifiedSocialCreditCode": {
+                        "type": "string",
+                        "description": "统一社会信用代码",
+                        "format": "string"
+                    },
+                    "hospitalLevel": {
+                        "type": "string",
+                        "description": "医院等级",
+                        "format": "string"
+                    },
+                    "provinceCity": {
+                        "type": "string",
+                        "description": "所属省市中文",
+                        "format": "string"
+                    },
+                    "districtCounty": {
+                        "type": "string",
+                        "description": "所属区县中文",
+                        "format": "string"
+                    },
+                    "deptCategory": {
+                        "type": "string",
+                        "description": "机构类别编码",
+                        "format": "string"
+                    },
+                    "leader": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "负责人"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "description": "联系电话",
+                        "format": "string"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "邮箱",
+                        "format": "string"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "机构状态:0正常,1停用",
+                        "format": "string"
+                    },
+                    "orgShortName": {
+                        "type": "string",
+                        "description": "机构简称",
+                        "format": "string"
+                    },
+                    "hrScope": {
+                        "type": "string",
+                        "description": "互认范围：全国HR，本省HR，昆明HR",
+                        "format": "string"
+                    },
+                    "hrValidStartTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "互认资质有效开始时间"
+                    },
+                    "hrValidEndTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "互认资质有效结束时间"
+                    },
+                    "hrStatus": {
+                        "type": "string",
+                        "description": "互认状态",
+                        "format": "string"
+                    },
+                    "medicalBelongType": {
+                        "type": "string",
+                        "description": "XX机构所有制类型",
+                        "format": "string"
+                    },
+                    "medicalServiceType": {
+                        "type": "string",
+                        "description": "XX机构服务类型",
+                        "format": "string"
+                    },
+                    "medicalFlag": {
+                        "type": "string",
+                        "description": "XX机构标识",
+                        "format": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "机构类型（0：管理机构、1：XX机构）",
+                        "format": "string"
+                    },
+                    "orderNum": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "显示顺序"
+                    },
+                    "campusCode": {
+                        "type": "string",
+                        "description": "园区编码",
+                        "format": "string"
+                    },
+                    "campusName": {
+                        "type": "string",
+                        "description": "院区名称",
+                        "format": "string"
+                    },
+                    "address": {
+                        "type": "string",
+                        "description": "详细地址",
+                        "format": "string"
+                    },
+                    "labels": {
+                        "type": "string",
+                        "description": "互认标签列表",
+                        "format": "string"
+                    }
+                }
+            },
+            "RMedicalOrgVo": {
+                "type": "object",
+                "description": "响应信息主体",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "msg": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/MedicalOrgVo"
+                    }
+                }
+            },
+            "RVoid": {
+                "type": "object",
+                "description": "响应信息主体",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "msg": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {}
+    },
+    "servers": []
+}

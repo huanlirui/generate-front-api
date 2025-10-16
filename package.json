@@ -1,0 +1,43 @@
+{
+  "name": "generate-front-api",
+  "version": "1.0.0",
+  "description": "基于 OpenAPI 规范自动生成 TypeScript API 请求代码和类型定义的工具",
+  "main": "lib/generator.js",
+  "type": "module",
+  "bin": {
+    "generate-front-api": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "README.md",
+    "QUICKSTART.md",
+    "CHANGELOG.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huanlirui/generate-front-api.git"
+  },
+  "keywords": [
+    "openapi",
+    "typescript",
+    "api",
+    "generator",
+    "code-generator",
+    "swagger",
+    "axios",
+    "frontend"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/huanlirui/generate-front-api/issues"
+  },
+  "homepage": "https://github.com/huanlirui/generate-front-api#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

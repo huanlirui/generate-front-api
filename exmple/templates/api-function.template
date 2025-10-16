@@ -1,0 +1,13 @@
+/**
+ * {{summary}}
+ * @param {{paramName}}
+ {{#hasReturns}}* @returns {*}{{/hasReturns}}
+ */
+export const {{functionName}} = ({{params}}): AxiosPromise<{{returnType}}> => {
+  return request({
+    url: {{url}},
+    method: '{{method}}'{{#hasData}},
+    data: {{dataParam}}{{/hasData}}{{#hasParams}},
+    params: {{paramsParam}}{{/hasParams}}
+  });
+};

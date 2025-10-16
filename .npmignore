@@ -1,0 +1,25 @@
+node_modules/
+.git/
+.gitignore
+.DS_Store
+*.log
+.vscode/
+.idea/
+test/
+tests/
+*.test.js
+*.spec.js
+coverage/
+.nyc_output/
+naming-strategy-examples.md
+test-local.sh
+MIGRATION.md
+PUBLISH.md
+
+# 用户配置文件示例
+generate-front-api.config.js
+.generate-front-api.config.js
+
+# OpenAPI 文件
+openApi.json
+
