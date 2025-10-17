@@ -480,7 +480,7 @@ export interface QueryMedicalOrgTreeQuery {
 }
 
 // 请求体接口定义
-export interface UpdateBasicManageMedicalOrgData {
+export interface UpdateBasicManageMedicalOrgRequestData {
   /**
    * 机构ID
    */
@@ -631,7 +631,7 @@ export interface UpdateBasicManageMedicalOrgData {
    */
   labels?: string;
 }
-export interface AddBasicManageMedicalOrgData {
+export interface AddBasicManageMedicalOrgRequestData {
   /**
    * 所属父机构【管理机构】ID
    */

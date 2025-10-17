@@ -8,8 +8,8 @@ import {
   ListMedicalOrgListQuery,
   QueryMedicalOrgExportWithOptionsQuery,
   QueryMedicalOrgTreeQuery,
-  UpdateBasicManageMedicalOrgData,
-  AddBasicManageMedicalOrgData,
+  UpdateBasicManageMedicalOrgRequestData,
+  AddBasicManageMedicalOrgRequestData,
 } from "./types";
 
 /**
@@ -18,7 +18,7 @@ import {
  
  */
 export const updateBasicManageMedicalOrg = (
-  data: UpdateBasicManageMedicalOrgData,
+  data: UpdateBasicManageMedicalOrgRequestData,
 ): AxiosPromise<void> => {
   return request({
     url: "/hr/basicManage/medicalOrg",
@@ -32,7 +32,7 @@ export const updateBasicManageMedicalOrg = (
  
  */
 export const addBasicManageMedicalOrg = (
-  data: AddBasicManageMedicalOrgData,
+  data: AddBasicManageMedicalOrgRequestData,
 ): AxiosPromise<void> => {
   return request({
     url: "/hr/basicManage/medicalOrg",
