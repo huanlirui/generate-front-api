@@ -1,6 +1,6 @@
 {
   "name": "generate-front-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A tool to automatically generate TypeScript API request code and type definitions based on OpenAPI specifications | 基于 OpenAPI 规范自动生成 TypeScript API 请求代码和类型定义的工具",
   "main": "lib/generator.js",
   "type": "module",

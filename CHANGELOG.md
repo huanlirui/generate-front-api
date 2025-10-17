@@ -2,6 +2,14 @@
 
 English | [简体中文](./CHANGELOG.zh-CN.md)
 
+## [1.0.2] - 2025-01-XX
+
+### 🔧 Bug Fixes
+
+- Fixed issues and improvements from the latest commit
+
+---
+
 ## [1.0.1] - 2025-10-16
 
 ### ✨ New Features
