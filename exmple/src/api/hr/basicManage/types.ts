@@ -502,11 +502,6 @@ export interface UpdateBasicManageMedicalOrgRequestData {
   admCode: string;
 
   /**
-   * 行政区划名称
-   */
-  admName?: string;
-
-  /**
    * 机构编码，唯一标识
    */
   orgCode: string;
@@ -517,14 +512,49 @@ export interface UpdateBasicManageMedicalOrgRequestData {
   medicalInsCode: string;
 
   /**
-   * 统一社会信用代码
-   */
-  unifiedSocialCreditCode?: string;
-
-  /**
    * 医院等级
    */
   hospitalLevel: string;
+
+  /**
+   * 互认范围：全国HR，本省HR，昆明HR
+   */
+  hrScope: string;
+
+  /**
+   * 互认状态
+   */
+  hrStatus: string;
+
+  /**
+   * XX机构所有制类型
+   */
+  medicalBelongType: string;
+
+  /**
+   * XX机构服务类型
+   */
+  medicalServiceType: string;
+
+  /**
+   * XX机构标识
+   */
+  medicalFlag: string;
+
+  /**
+   * 机构类型（0：管理机构、1：XX机构）
+   */
+  type: string;
+
+  /**
+   * 行政区划名称
+   */
+  admName?: string;
+
+  /**
+   * 统一社会信用代码
+   */
+  unifiedSocialCreditCode?: string;
 
   /**
    * 所属省市中文
@@ -567,11 +597,6 @@ export interface UpdateBasicManageMedicalOrgRequestData {
   orgShortName?: string;
 
   /**
-   * 互认范围：全国HR，本省HR，昆明HR
-   */
-  hrScope: string;
-
-  /**
    * 互认资质有效开始时间
    */
   hrValidStartTime?: string;
@@ -580,31 +605,6 @@ export interface UpdateBasicManageMedicalOrgRequestData {
    * 互认资质有效结束时间
    */
   hrValidEndTime?: string;
-
-  /**
-   * 互认状态
-   */
-  hrStatus: string;
-
-  /**
-   * XX机构所有制类型
-   */
-  medicalBelongType: string;
-
-  /**
-   * XX机构服务类型
-   */
-  medicalServiceType: string;
-
-  /**
-   * XX机构标识
-   */
-  medicalFlag: string;
-
-  /**
-   * 机构类型（0：管理机构、1：XX机构）
-   */
-  type: string;
 
   /**
    * 显示顺序
@@ -648,11 +648,6 @@ export interface AddBasicManageMedicalOrgRequestData {
   admCode: string;
 
   /**
-   * 行政区划名称
-   */
-  admName?: string;
-
-  /**
    * 机构编码，唯一标识
    */
   orgCode: string;
@@ -663,14 +658,49 @@ export interface AddBasicManageMedicalOrgRequestData {
   medicalInsCode: string;
 
   /**
-   * 统一社会信用代码
-   */
-  unifiedSocialCreditCode?: string;
-
-  /**
    * 医院等级
    */
   hospitalLevel: string;
+
+  /**
+   * 互认范围：全国HR，本省HR，昆明HR
+   */
+  hrScope: string;
+
+  /**
+   * 互认状态
+   */
+  hrStatus: string;
+
+  /**
+   * XX机构所有制类型
+   */
+  medicalBelongType: string;
+
+  /**
+   * XX机构服务类型
+   */
+  medicalServiceType: string;
+
+  /**
+   * XX机构标识
+   */
+  medicalFlag: string;
+
+  /**
+   * 机构类型（0：管理机构、1：XX机构）
+   */
+  type: string;
+
+  /**
+   * 行政区划名称
+   */
+  admName?: string;
+
+  /**
+   * 统一社会信用代码
+   */
+  unifiedSocialCreditCode?: string;
 
   /**
    * 所属省市中文
@@ -713,11 +743,6 @@ export interface AddBasicManageMedicalOrgRequestData {
   orgShortName?: string;
 
   /**
-   * 互认范围：全国HR，本省HR，昆明HR
-   */
-  hrScope: string;
-
-  /**
    * 互认资质有效开始时间
    */
   hrValidStartTime?: string;
@@ -726,31 +751,6 @@ export interface AddBasicManageMedicalOrgRequestData {
    * 互认资质有效结束时间
    */
   hrValidEndTime?: string;
-
-  /**
-   * 互认状态
-   */
-  hrStatus: string;
-
-  /**
-   * XX机构所有制类型
-   */
-  medicalBelongType: string;
-
-  /**
-   * XX机构服务类型
-   */
-  medicalServiceType: string;
-
-  /**
-   * XX机构标识
-   */
-  medicalFlag: string;
-
-  /**
-   * 机构类型（0：管理机构、1：XX机构）
-   */
-  type: string;
 
   /**
    * 显示顺序

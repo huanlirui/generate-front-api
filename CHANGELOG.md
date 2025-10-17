@@ -2,7 +2,18 @@
 
 English | [简体中文](./CHANGELOG.zh-CN.md)
 
-## [1.0.2] - 2025-01-XX
+## [1.0.3] - 2025-10-17
+
+### ✨ Improvements
+
+- **Type Definition Sorting** - Required properties now appear before optional properties in generated TypeScript interfaces
+  - Improves code readability and follows TypeScript best practices
+  - Required fields (without `?`) are now listed first
+  - Optional fields (with `?`) are listed after required fields
+
+---
+
+## [1.0.2] - 2025-10-16
 
 ### 🔧 Bug Fixes
 
